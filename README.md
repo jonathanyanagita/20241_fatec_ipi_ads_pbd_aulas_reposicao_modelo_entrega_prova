@@ -1,2 +1,2 @@
-Nomes dos integrantes completos e sem abreviações e seus RAS
-Somente serão considerados os integrantes que tiverem ingressado com, no máximo, 30 minutos de atraso
+JONATHAN HIROYUKI YANAGITA - Ra: 2040482213034
+WILLIAN APARECIDO AMORIM - Ra: 2040482213011
