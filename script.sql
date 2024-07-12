@@ -103,5 +103,25 @@ END; $$
 -- ----------------------------------------------------------------
 -- 5. Limpeza de valores NULL
 --escreva a sua solução aqui
-
+DO $$
+DECLARE
+cur_deletar REFCURSOR;
+tupla RECORD;
+BEGIN
+OPEN cur_deletar SCROLL FOR 
+SELECT * FROM prova;
+LOOP
+FETCH cur_deletar INTO tupla;
+EXIT WHEN NOT FOUND;
+IF tupla.studentid ISNULL OR tupla.salary ISNULL OR tupla.mother_edu ISNULL OR tupla.father_edu ISNULL
+OR tupla.prep_study ISNULL OR tupla.prep_exam ISNULL OR tupla.grade ISNULL THEN DELETE FROM prova WHERE CURRENT OF cur_deletar;
+END IF;
+END LOOP;
+LOOP
+FETCH BACKWARD FROM cur_deletar INTO tupla;
+EXIT WHEN NOT FOUND;
+RAISE NOTICE '%', tupla;
+END LOOP;
+CLOSE cur_deletar;
+END; $$
 -- ----------------------------------------------------------------
