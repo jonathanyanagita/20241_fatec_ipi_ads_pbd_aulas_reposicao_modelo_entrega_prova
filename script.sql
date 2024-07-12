@@ -79,7 +79,26 @@ END; $$
 -- ----------------------------------------------------------------
 -- 4 Salário versus estudos
 --escreva a sua solução aqui
-
+DO $$
+DECLARE
+estudantes INT;
+contador INT := 0;
+sozinho INT := 1;
+falhou INT := 0;
+cur_estudante_sozinho_aprovado CURSOR(sozinho INT, falhou INT) FOR
+SELECT * FROM prova WHERE prep_study = sozinho AND grade > falhou;
+BEGIN
+OPEN cur_estudante_sozinho_aprovado(sozinho := sozinho,falhou := falhou);
+LOOP
+FETCH cur_estudante_sozinho_aprovado INTO estudantes;
+EXIT WHEN NOT FOUND;
+contador := contador + 1;
+END LOOP;
+IF contador = 0 THEN contador := -1;
+END IF;
+RAISE NOTICE '%', contador;
+CLOSE cur_estudante_sozinho_aprovado;
+END; $$
 
 -- ----------------------------------------------------------------
 -- 5. Limpeza de valores NULL
